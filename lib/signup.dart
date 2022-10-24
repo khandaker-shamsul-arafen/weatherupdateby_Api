@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:login_by_restapi/weather.dart';
 
 class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _signupState extends State<signup> {
         );
         if(response.statusCode==200){
           print('account created Sucesfulli');
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>weather()));
         }
         else{
           print('something wrong');

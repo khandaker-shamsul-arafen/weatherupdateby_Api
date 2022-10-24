@@ -15,7 +15,7 @@ class weather extends StatefulWidget {
 class _weatherState extends State<weather> {
   var data;
   Future<Weatherapi>updatewe()async {
-    final response = await http.get(Uri.parse('	http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json'));
+    final response = await http.get(Uri.parse('http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json'));
      data=jsonDecode(response.body.toString());
      if(response.statusCode==200){
 
@@ -31,6 +31,7 @@ class _weatherState extends State<weather> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purple.shade200,
       appBar:AppBar(
         centerTitle: true,
         title: Text('weather update'),
@@ -49,8 +50,8 @@ class _weatherState extends State<weather> {
                     child: Column(
                       children: [
                         ReusbaleRow(title: 'Cloudcover', value: snapshot.data!.dataseries![index].cloudcover.toString()),
-                      //  ReusbaleRow(title: 'liftedindex', value: snapshot.data!.dataseries![index].liftedIndex.toString()),
-                     //   ReusbaleRow(title: 'seeing', value: snapshot.data!.dataseries![index].seeing.toString())
+                        ReusbaleRow(title: 'liftedindex', value: snapshot.data!.dataseries![index].liftedIndex.toString()),
+                        ReusbaleRow(title: 'seeing', value: snapshot.data!.dataseries![index].seeing.toString())
 
 
 
@@ -82,8 +83,17 @@ class ReusbaleRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title),
-          Text(value ),
+          Card(
+            elevation: 4,
+              child: Row(
+                children: [
+                  Text(title),
+                  SizedBox(width: 270,),
+                  Text(value ),
+                ],
+              ),
+
+          )
 
         ],
       ),
